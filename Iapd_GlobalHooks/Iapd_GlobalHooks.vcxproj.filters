@@ -17,9 +17,15 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="KeyHook.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHook.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
