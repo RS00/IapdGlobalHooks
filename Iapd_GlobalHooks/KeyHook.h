@@ -10,7 +10,7 @@ class KeyHook
 private:
 public:
 	KeyHook();
-	string getNameFromCode(long code);
+	string getNameFromStr(KBDLLHOOKSTRUCT code);
 	~KeyHook();
 };
 

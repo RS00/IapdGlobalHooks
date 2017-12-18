@@ -11,12 +11,11 @@ KeyHook::~KeyHook()
 }
 
 
-string KeyHook::getNameFromCode(long code)
+string KeyHook::getNameFromStr(KBDLLHOOKSTRUCT str)
 {
-	CHAR name[1024];
-	UINT scanCode = MapVirtualKeyW(code, MAPVK_VK_TO_VSC);
-	long long lParamValue = (scanCode << 16);
-	GetKeyNameTextA(lParamValue, name, 1024);
-	string result(name);
-	return result;
+	DWORD dwMsg = 1;
+	char lpszKeyName[1024] = { 0 };
+	LONG lParamVal = (byte)str.scanCode << 16;
+	GetKeyNameTextA(lParamVal, lpszKeyName, 1024);
+	return string(lpszKeyName);
 }

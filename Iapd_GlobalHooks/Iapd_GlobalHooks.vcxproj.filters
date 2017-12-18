@@ -5,20 +5,29 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Src">
+    <Filter Include="Source">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Src</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
-      <Filter>Src</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="KeyHook.cpp">
-      <Filter>Src</Filter>
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Email.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +35,18 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="KeyHook.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardLogger.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseLogger.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Email.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
