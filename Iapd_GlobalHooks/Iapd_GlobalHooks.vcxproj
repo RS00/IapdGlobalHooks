@@ -143,6 +143,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigFile.h" />
     <ClInclude Include="Email.h" />
     <ClInclude Include="KeyboardLogger.h" />
     <ClInclude Include="KeyHook.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="MouseLogger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigFile.cpp" />
     <ClCompile Include="Email.cpp" />
     <ClCompile Include="KeyboardLogger.cpp" />
     <ClCompile Include="KeyHook.cpp">

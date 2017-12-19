@@ -29,6 +29,9 @@
     <ClCompile Include="Email.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="ConfigFile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h">
@@ -49,5 +52,11 @@
     <ClInclude Include="Email.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="ConfigFile.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainWindow.resx" />
   </ItemGroup>
 </Project>

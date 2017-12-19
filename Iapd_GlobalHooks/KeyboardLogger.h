@@ -12,7 +12,7 @@ private:
 	HANDLE hFile;
 	long long maxLength;
 	long long currentLength;
-	string emailReceiver;
+	static string emailReceiver;
 	string getCurrentTime();
 	static void sendFileNewThread(LPVOID arg);
 public:
