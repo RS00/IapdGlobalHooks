@@ -20,16 +20,13 @@
     <ClCompile Include="KeyHook.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardLogger.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseLogger.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Email.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="ConfigFile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,19 +37,13 @@
     <ClInclude Include="KeyHook.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ILogger.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardLogger.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseLogger.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Email.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ConfigFile.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

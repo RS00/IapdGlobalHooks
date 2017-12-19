@@ -1,5 +1,4 @@
 #include "MainWindow.h"
-#include "Email.h"
 using namespace System;
 using namespace System::Windows::Forms;
 
