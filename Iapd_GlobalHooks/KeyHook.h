@@ -7,7 +7,6 @@ using namespace std;
 
 class KeyHook
 {
-private:
 public:
 	KeyHook();
 	string getNameFromStr(KBDLLHOOKSTRUCT code);

