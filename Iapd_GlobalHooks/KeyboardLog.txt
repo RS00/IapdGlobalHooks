@@ -1,11 +1,427 @@
-Tue Dec 19 03:57:05 2017: L was pressed.
-Tue Dec 19 03:57:05 2017: 0 was pressed.
-Tue Dec 19 03:57:06 2017: 9 was pressed.
-Tue Dec 19 03:57:06 2017: 8 was pressed.
-Tue Dec 19 03:57:06 2017: 7 was pressed.
-Tue Dec 19 03:57:06 2017: 6 was pressed.
-Tue Dec 19 03:57:07 2017: 5 was pressed.
-Tue Dec 19 03:57:07 2017: 4 was pressed.
-Tue Dec 19 03:57:14 2017: Num 3 was pressed.
-Tue Dec 19 03:57:15 2017: Num 2 was pressed.
-Tue Dec 19 03:57:15 2017: Num 1 was pressed.
+Wed Dec 20 02:29:54 2017: K was pressed.
+Wed Dec 20 02:29:54 2017: J was pressed.
+Wed Dec 20 02:29:54 2017: F was pressed.
+Wed Dec 20 02:29:54 2017: J was pressed.
+Wed Dec 20 02:29:54 2017: D was pressed.
+Wed Dec 20 02:29:54 2017: J was pressed.
+Wed Dec 20 02:29:54 2017: J was pressed.
+Wed Dec 20 02:29:54 2017: F was pressed.
+Wed Dec 20 02:29:55 2017: J was pressed.
+Wed Dec 20 02:29:55 2017: F was pressed.
+Wed Dec 20 02:29:55 2017: D was pressed.
+Wed Dec 20 02:29:55 2017: Space was pressed.
+Wed Dec 20 02:29:55 2017: F was pressed.
+Wed Dec 20 02:29:55 2017: D was pressed.
+Wed Dec 20 02:29:55 2017: F was pressed.
+Wed Dec 20 02:29:55 2017: Space was pressed.
+Wed Dec 20 02:29:56 2017: D was pressed.
+Wed Dec 20 02:29:56 2017: F was pressed.
+Wed Dec 20 02:29:56 2017: D was pressed.
+Wed Dec 20 02:29:56 2017: J was pressed.
+Wed Dec 20 02:29:56 2017: Space was pressed.
+Wed Dec 20 02:29:56 2017: F was pressed.
+Wed Dec 20 02:29:56 2017: D was pressed.
+Wed Dec 20 02:29:56 2017: Space was pressed.
+Wed Dec 20 02:29:56 2017: J was pressed.
+Wed Dec 20 02:29:56 2017: D was pressed.
+Wed Dec 20 02:29:56 2017: Space was pressed.
+Wed Dec 20 02:29:56 2017: J was pressed.
+Wed Dec 20 02:30:01 2017: Ctrl was pressed.
+Wed Dec 20 02:30:01 2017: CTRL + S was pressed.
+Wed Dec 20 02:30:02 2017: O was pressed.
+Wed Dec 20 02:30:02 2017: S was pressed.
+Wed Dec 20 02:30:02 2017: O was pressed.
+Wed Dec 20 02:30:02 2017: D was pressed.
+Wed Dec 20 02:30:02 2017: O was pressed.
+Wed Dec 20 02:30:02 2017: D was pressed.
+Wed Dec 20 02:30:02 2017: O was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:03 2017: O was pressed.
+Wed Dec 20 02:30:03 2017: O was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: O was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: D was pressed.
+Wed Dec 20 02:30:03 2017: S was pressed.
+Wed Dec 20 02:30:04 2017: S was pressed.
+Wed Dec 20 02:30:04 2017: D was pressed.
+Wed Dec 20 02:31:59 2017: Ctrl was pressed.
+Wed Dec 20 02:32:00 2017: Ctrl was pressed.
+Wed Dec 20 02:32:00 2017: Ctrl was pressed.
+Wed Dec 20 02:32:00 2017:  was pressed.
+Wed Dec 20 02:32:16 2017: Q was pressed.
+Wed Dec 20 02:32:16 2017: W was pressed.
+Wed Dec 20 02:32:17 2017: E was pressed.
+Wed Dec 20 02:32:17 2017: R was pressed.
+Wed Dec 20 02:32:17 2017: T was pressed.
+Wed Dec 20 02:32:18 2017: Y was pressed.
+Wed Dec 20 02:32:19 2017: Tab was pressed.
+Wed Dec 20 02:32:23 2017: Shift was pressed.
+Wed Dec 20 02:32:23 2017: Ctrl was pressed.
+Wed Dec 20 02:32:24 2017:  was pressed.
+Wed Dec 20 02:33:33 2017:  was pressed.
+Wed Dec 20 02:34:37 2017: Ctrl was pressed.
+Wed Dec 20 02:34:45 2017: CTRL + A was pressed.
+Wed Dec 20 02:34:50 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:34:51 2017:  was pressed.
+Wed Dec 20 02:35:13 2017:  was pressed.
+Wed Dec 20 02:35:15 2017:  was pressed.
+Wed Dec 20 02:35:16 2017:  was pressed.
+Wed Dec 20 02:35:17 2017:  was pressed.
+Wed Dec 20 02:35:18 2017:  was pressed.
+Wed Dec 20 02:35:19 2017:  was pressed.
+Wed Dec 20 02:35:20 2017:  was pressed.
+Wed Dec 20 02:35:31 2017: Num 3 was pressed.
+Wed Dec 20 02:35:56 2017: F3 was pressed.
+Wed Dec 20 02:38:42 2017: Tab was pressed.
+Wed Dec 20 02:41:10 2017: ALT + Ctrl was pressed.
+Wed Dec 20 02:41:40 2017: ALT + Ctrl was pressed.
+Wed Dec 20 02:44:13 2017: Ctrl was pressed.
+Wed Dec 20 02:44:14 2017: Shift was pressed.
+Wed Dec 20 02:44:15 2017:  was pressed.
+Wed Dec 20 02:47:21 2017: Tab was pressed.
+Wed Dec 20 02:48:12 2017: ALT + A was pressed.
+Wed Dec 20 02:48:12 2017: ALT + S was pressed.
+Wed Dec 20 02:49:20 2017: Alt + R was pressed.
+Wed Dec 20 02:49:24 2017: Alt + W was pressed.
+Wed Dec 20 02:49:24 2017: Alt + R was pressed.
+Wed Dec 20 02:49:25 2017: Esc was pressed.
+Wed Dec 20 02:49:25 2017: Esc was pressed.
+Wed Dec 20 02:49:25 2017: Esc was pressed.
+Wed Dec 20 02:51:57 2017: Q was pressed.
+Wed Dec 20 02:51:57 2017: W was pressed.
+Wed Dec 20 02:51:58 2017: E was pressed.
+Wed Dec 20 02:51:58 2017: R was pressed.
+Wed Dec 20 02:51:58 2017: T was pressed.
+Wed Dec 20 02:51:58 2017: Y was pressed.
+Wed Dec 20 02:52:00 2017: Alt was pressed.
+Wed Dec 20 02:52:02 2017: Alt was pressed.
+Wed Dec 20 02:52:02 2017: Alt was pressed.
+Wed Dec 20 02:52:02 2017: Alt + S was pressed.
+Wed Dec 20 02:52:33 2017: A was pressed.
+Wed Dec 20 02:52:33 2017: S was pressed.
+Wed Dec 20 02:52:34 2017: D was pressed.
+Wed Dec 20 02:52:34 2017: Alt was pressed.
+Wed Dec 20 02:52:45 2017: A was pressed.
+Wed Dec 20 02:52:45 2017: S was pressed.
+Wed Dec 20 02:52:46 2017: D was pressed.
+Wed Dec 20 02:52:47 2017: Alt was pressed.
+Wed Dec 20 02:52:47 2017: Alt was pressed.
+Wed Dec 20 02:52:47 2017: Alt + 1 was pressed.
+Wed Dec 20 02:53:33 2017: Alt was pressed.
+Wed Dec 20 02:59:19 2017: Alt was pressed.
+Wed Dec 20 02:59:20 2017: Alt was pressed.
+Wed Dec 20 02:59:20 2017: Alt was pressed.
+Wed Dec 20 02:59:20 2017: Alt was pressed.
+Wed Dec 20 02:59:21 2017: Alt was pressed.
+Wed Dec 20 02:59:21 2017: Alt was pressed.
+Wed Dec 20 02:59:21 2017: Alt was pressed.
+Wed Dec 20 02:59:21 2017: Alt was pressed.
+Wed Dec 20 02:59:22 2017: Alt was pressed.
+Wed Dec 20 02:59:22 2017: Q was pressed.
+Wed Dec 20 02:59:23 2017: W was pressed.
+Wed Dec 20 02:59:23 2017: E was pressed.
+Wed Dec 20 02:59:23 2017: R was pressed.
+Wed Dec 20 02:59:40 2017: Q was pressed.
+Wed Dec 20 02:59:40 2017: W was pressed.
+Wed Dec 20 02:59:41 2017: E was pressed.
+Wed Dec 20 02:59:41 2017: Alt was pressed.
+Wed Dec 20 02:59:41 2017: Alt was pressed.
+Wed Dec 20 02:59:42 2017: Alt was pressed.
+Wed Dec 20 02:59:42 2017: Alt was pressed.
+Wed Dec 20 02:59:52 2017: Ctrl was pressed.
+Wed Dec 20 02:59:53 2017: Ctrl + Shift was pressed.
+Wed Dec 20 02:59:53 2017: Shift + Ctrl + Alt was pressed.
+Wed Dec 20 02:59:54 2017:  was pressed.
+Wed Dec 20 02:59:56 2017: A was pressed.
+Wed Dec 20 02:59:57 2017: S was pressed.
+Wed Dec 20 02:59:57 2017: D was pressed.
+Wed Dec 20 02:59:57 2017: Q was pressed.
+Wed Dec 20 02:59:58 2017: W was pressed.
+Wed Dec 20 02:59:58 2017: E was pressed.
+Wed Dec 20 02:59:59 2017: Shift was pressed.
+Wed Dec 20 02:59:59 2017: Shift + Ctrl was pressed.
+Wed Dec 20 03:00:30 2017: Ctrl was pressed.
+Wed Dec 20 03:00:32 2017: Ctrl + W was pressed.
+Wed Dec 20 03:27:03 2017: C was pressed.
+Wed Dec 20 03:27:03 2017: C was pressed.
+Wed Dec 20 03:27:10 2017: C was pressed.
+Wed Dec 20 03:27:55 2017: C was pressed.
+Wed Dec 20 03:28:12 2017: C was pressed.
+Wed Dec 20 03:28:23 2017: A was pressed.
+Wed Dec 20 03:28:43 2017: C was pressed.
+Wed Dec 20 03:28:44 2017: C was pressed.
+Wed Dec 20 03:28:44 2017: C was pressed.
+Wed Dec 20 03:28:44 2017: C was pressed.
+Wed Dec 20 03:28:44 2017: C was pressed.
+Wed Dec 20 03:28:45 2017: C was pressed.
+Wed Dec 20 03:28:45 2017: C was pressed.
+Wed Dec 20 03:28:47 2017: Space was pressed.
+Wed Dec 20 03:28:48 2017: C was pressed.
+Wed Dec 20 03:28:48 2017: C was pressed.
+Wed Dec 20 03:28:48 2017: C was pressed.
+Wed Dec 20 03:28:48 2017: C was pressed.
+Wed Dec 20 03:30:46 2017: K was pressed.
+Wed Dec 20 03:30:47 2017: K was pressed.
+Wed Dec 20 03:30:47 2017: K was pressed.
+Wed Dec 20 03:30:47 2017: K was pressed.
+Wed Dec 20 03:30:47 2017: K was pressed.
+Wed Dec 20 03:30:50 2017: K was pressed.
+Wed Dec 20 03:30:50 2017: K was pressed.
+Wed Dec 20 03:30:51 2017: Backspace was pressed.
+Wed Dec 20 03:30:51 2017: Backspace was pressed.
+Wed Dec 20 03:30:53 2017: K was pressed.
+Wed Dec 20 03:30:53 2017: K was pressed.
+Wed Dec 20 03:30:53 2017: K was pressed.
+Wed Dec 20 03:32:17 2017: D was pressed.
+Wed Dec 20 03:32:17 2017: D was pressed.
+Wed Dec 20 03:32:18 2017: D was pressed.
+Wed Dec 20 03:32:18 2017: D was pressed.
+Wed Dec 20 03:32:20 2017: D was pressed.
+Wed Dec 20 03:32:20 2017: D was pressed.
+Wed Dec 20 03:32:21 2017: D was pressed.
+Wed Dec 20 03:32:21 2017: D was pressed.
+Wed Dec 20 03:32:21 2017: D was pressed.
+Wed Dec 20 03:32:21 2017: D was pressed.
+Wed Dec 20 03:32:22 2017: D was pressed.
+Wed Dec 20 03:32:22 2017: D was pressed.
+Wed Dec 20 03:32:22 2017: D was pressed.
+Wed Dec 20 03:32:22 2017: D was pressed.
+Wed Dec 20 03:32:23 2017: D was pressed.
+Wed Dec 20 03:32:23 2017: D was pressed.
+Wed Dec 20 03:32:23 2017: D was pressed.
+Wed Dec 20 03:32:23 2017: D was pressed.
+Wed Dec 20 03:32:24 2017: D was pressed.
+Wed Dec 20 03:32:24 2017: Shift was pressed.
+Wed Dec 20 03:32:24 2017: Shift + D was pressed.
+Wed Dec 20 03:32:25 2017: D was pressed.
+Wed Dec 20 03:32:25 2017: D was pressed.
+Wed Dec 20 03:32:25 2017: D was pressed.
+Wed Dec 20 03:32:25 2017: D was pressed.
+Wed Dec 20 03:32:26 2017: Alt was pressed.
+Wed Dec 20 03:32:26 2017: Alt was pressed.
+Wed Dec 20 03:32:27 2017: Alt + D was pressed.
+Wed Dec 20 03:32:28 2017: D was pressed.
+Wed Dec 20 03:32:28 2017: D was pressed.
+Wed Dec 20 03:32:28 2017: D was pressed.
+Wed Dec 20 03:32:29 2017: D was pressed.
+Wed Dec 20 03:32:29 2017: D was pressed.
+Wed Dec 20 03:32:29 2017: D was pressed.
+Wed Dec 20 03:32:29 2017: D was pressed.
+Wed Dec 20 03:32:30 2017: D was pressed.
+Wed Dec 20 03:32:30 2017: D was pressed.
+Wed Dec 20 03:32:30 2017: D was pressed.
+Wed Dec 20 03:32:30 2017: D was pressed.
+Wed Dec 20 03:32:31 2017: D was pressed.
+Wed Dec 20 03:32:31 2017: D was pressed.
+Wed Dec 20 03:32:31 2017: D was pressed.
+Wed Dec 20 03:32:32 2017: D was pressed.
+Wed Dec 20 03:32:32 2017: D was pressed.
+Wed Dec 20 03:32:32 2017: D was pressed.
+Wed Dec 20 03:32:32 2017: D was pressed.
+Wed Dec 20 03:32:33 2017: D was pressed.
+Wed Dec 20 03:32:33 2017: D was pressed.
+Wed Dec 20 03:32:34 2017: D was pressed.
+Wed Dec 20 03:32:34 2017: D was pressed.
+Wed Dec 20 03:32:35 2017: D was pressed.
+Wed Dec 20 03:32:35 2017: D was pressed.
+Wed Dec 20 03:32:36 2017: D was pressed.
+Wed Dec 20 03:32:36 2017: D was pressed.
+Wed Dec 20 03:32:37 2017: D was pressed.
+Wed Dec 20 03:32:37 2017: D was pressed.
+Wed Dec 20 03:34:43 2017: Num 4 was pressed.
+Wed Dec 20 03:34:43 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:44 2017: Num 4 was pressed.
+Wed Dec 20 03:34:46 2017: Num 4 was pressed.
+Wed Dec 20 03:34:47 2017: Num 4 was pressed.
+Wed Dec 20 03:34:47 2017: Num 4 was pressed.
+Wed Dec 20 03:34:49 2017: Num 6 was pressed.
+Wed Dec 20 03:34:50 2017: Num 6 was pressed.
+Wed Dec 20 03:34:50 2017: Num 6 was pressed.
+Wed Dec 20 03:34:50 2017: Num 4 was pressed.
+Wed Dec 20 03:34:50 2017: Num 4 was pressed.
+Wed Dec 20 03:34:51 2017: Num 4 was pressed.
+Wed Dec 20 03:34:51 2017: Num 4 was pressed.
+Wed Dec 20 03:35:00 2017: B was pressed.
+Wed Dec 20 03:35:00 2017: B was pressed.
+Wed Dec 20 03:35:00 2017: B was pressed.
+Wed Dec 20 03:35:00 2017: B was pressed.
+Wed Dec 20 03:35:00 2017: B was pressed.
+Wed Dec 20 03:35:04 2017: B was pressed.
+Wed Dec 20 03:35:04 2017: B was pressed.
+Wed Dec 20 03:35:05 2017: B was pressed.
+Wed Dec 20 03:35:05 2017: B was pressed.
+Wed Dec 20 03:35:05 2017: B was pressed.
+Wed Dec 20 03:35:05 2017: B was pressed.
+Wed Dec 20 03:35:11 2017: Num 4 was pressed.
+Wed Dec 20 03:35:11 2017: Num 4 was pressed.
+Wed Dec 20 03:35:11 2017: Num 4 was pressed.
+Wed Dec 20 03:35:12 2017: Num 4 was pressed.
+Wed Dec 20 03:35:12 2017: Num 4 was pressed.
+Wed Dec 20 04:04:40 2017: Space was pressed.
+Wed Dec 20 04:04:40 2017: Last key was blocked
+Wed Dec 20 04:04:40 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Space was pressed.
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Space was pressed.
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Space was pressed.
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:41 2017: Space was pressed.
+Wed Dec 20 04:04:41 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Space was pressed.
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Space was pressed.
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Space was pressed.
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Space was pressed.
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:42 2017: Last key was blocked
+Wed Dec 20 04:04:43 2017: Space was pressed.
+Wed Dec 20 04:04:43 2017: Last key was blocked
+Wed Dec 20 04:04:43 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Space was pressed.
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Space was pressed.
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Space was pressed.
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:46 2017: Space was pressed.
+Wed Dec 20 04:04:46 2017: Last key was blocked
+Wed Dec 20 04:04:47 2017: Last key was blocked
+Wed Dec 20 04:04:47 2017: Space was pressed.
+Wed Dec 20 04:04:47 2017: Last key was blocked
+Wed Dec 20 04:04:47 2017: Last key was blocked
+Wed Dec 20 04:04:47 2017: Space was pressed.
+Wed Dec 20 04:04:47 2017: Last key was blocked
+Wed Dec 20 04:04:47 2017: Last key was blocked
+Wed Dec 20 04:04:49 2017: Space was pressed.
+Wed Dec 20 04:04:49 2017: Space was pressed.
+Wed Dec 20 04:04:50 2017: Space was pressed.
+Wed Dec 20 04:04:50 2017: Space was pressed.
+Wed Dec 20 04:04:50 2017: Space was pressed.
+Wed Dec 20 04:04:50 2017: Space was pressed.
+Wed Dec 20 04:04:51 2017: Space was pressed.
+Wed Dec 20 04:04:59 2017: Space was pressed.
+Wed Dec 20 04:04:59 2017: Space was pressed.
+Wed Dec 20 04:05:02 2017: Enter was pressed.
+Wed Dec 20 04:05:02 2017: Last key was blocked
+Wed Dec 20 04:05:02 2017: Last key was blocked
+Wed Dec 20 04:05:02 2017: Enter was pressed.
+Wed Dec 20 04:05:02 2017: Last key was blocked
+Wed Dec 20 04:05:02 2017: Last key was blocked
+Wed Dec 20 04:05:03 2017: Enter was pressed.
+Wed Dec 20 04:05:03 2017: Last key was blocked
+Wed Dec 20 04:05:03 2017: Last key was blocked
+Wed Dec 20 04:05:03 2017: Enter was pressed.
+Wed Dec 20 04:05:03 2017: Last key was blocked
+Wed Dec 20 04:05:03 2017: Last key was blocked
+Wed Dec 20 04:05:03 2017: Enter was pressed.
+Wed Dec 20 04:05:04 2017: Enter was pressed.
+Wed Dec 20 04:05:04 2017: Enter was pressed.
+Wed Dec 20 04:05:04 2017: Enter was pressed.
+Wed Dec 20 04:05:04 2017: Enter was pressed.
+Wed Dec 20 04:05:05 2017: Enter was pressed.
+Wed Dec 20 04:05:05 2017: Enter was pressed.
+Wed Dec 20 04:05:05 2017: Enter was pressed.
+Wed Dec 20 04:05:05 2017: Enter was pressed.
+Wed Dec 20 04:05:06 2017: Enter was pressed.
+Wed Dec 20 04:05:06 2017: Enter was pressed.
+Wed Dec 20 04:05:07 2017: Enter was pressed.
+Wed Dec 20 04:05:09 2017: Enter was pressed.
+Wed Dec 20 04:05:10 2017: Ctrl was pressed.
+Wed Dec 20 04:05:10 2017: Ctrl + Z was pressed.
+Wed Dec 20 04:05:11 2017: Ctrl was pressed.
+Wed Dec 20 04:05:11 2017: Ctrl + Z was pressed.
+Wed Dec 20 04:06:52 2017: Enter was pressed.
+Wed Dec 20 04:06:52 2017: Last key was blocked
+Wed Dec 20 04:06:52 2017: Last key was blocked
+Wed Dec 20 04:06:52 2017: Enter was pressed.
+Wed Dec 20 04:06:52 2017: Last key was blocked
+Wed Dec 20 04:06:52 2017: Last key was blocked
+Wed Dec 20 04:06:52 2017: Enter was pressed.
+Wed Dec 20 04:06:52 2017: Last key was blocked
+Wed Dec 20 04:06:53 2017: Last key was blocked
+Wed Dec 20 04:06:53 2017: Enter was pressed.
+Wed Dec 20 04:06:53 2017: Last key was blocked
+Wed Dec 20 04:06:53 2017: Last key was blocked
+Wed Dec 20 04:06:53 2017: Enter was pressed.
+Wed Dec 20 04:06:53 2017: Last key was blocked
+Wed Dec 20 04:06:54 2017: Last key was blocked
+Wed Dec 20 04:06:54 2017: Enter was pressed.
+Wed Dec 20 04:06:54 2017: Last key was blocked
+Wed Dec 20 04:06:54 2017: Last key was blocked
+Wed Dec 20 04:08:14 2017: Tab was pressed.
+Wed Dec 20 04:08:14 2017: Last key was blocked
+Wed Dec 20 04:08:14 2017: Last key was blocked
+Wed Dec 20 04:08:17 2017: Tab was pressed.
+Wed Dec 20 04:08:17 2017: Last key was blocked
+Wed Dec 20 04:08:17 2017: Last key was blocked
+Wed Dec 20 04:08:17 2017: Tab was pressed.
+Wed Dec 20 04:08:17 2017: Last key was blocked
+Wed Dec 20 04:08:18 2017: Last key was blocked
+Wed Dec 20 04:08:18 2017: Tab was pressed.
+Wed Dec 20 04:08:18 2017: Last key was blocked
+Wed Dec 20 04:08:18 2017: Last key was blocked
+Wed Dec 20 04:08:18 2017: Tab was pressed.
+Wed Dec 20 04:08:18 2017: Last key was blocked
+Wed Dec 20 04:08:18 2017: Last key was blocked
+Wed Dec 20 04:08:19 2017: Tab was pressed.
+Wed Dec 20 04:08:19 2017: Last key was blocked
+Wed Dec 20 04:08:19 2017: Last key was blocked
+Wed Dec 20 04:08:19 2017: Tab was pressed.
+Wed Dec 20 04:08:19 2017: Last key was blocked
+Wed Dec 20 04:08:19 2017: Last key was blocked
+Wed Dec 20 04:08:22 2017: Tab was pressed.
+Wed Dec 20 04:08:25 2017: Tab was pressed.
+Wed Dec 20 04:08:26 2017: Backspace was pressed.
+Wed Dec 20 04:08:26 2017: Backspace was pressed.
+Wed Dec 20 04:08:31 2017: Tab was pressed.
+Wed Dec 20 04:08:31 2017: Last key was blocked
+Wed Dec 20 04:08:31 2017: Last key was blocked
+Wed Dec 20 04:08:44 2017: J was pressed.
+Wed Dec 20 04:08:44 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: J was pressed.
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: J was pressed.
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: J was pressed.
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: J was pressed.
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:45 2017: Last key was blocked
+Wed Dec 20 04:08:46 2017: Tab was pressed.
+Wed Dec 20 04:08:46 2017: Backspace was pressed.
