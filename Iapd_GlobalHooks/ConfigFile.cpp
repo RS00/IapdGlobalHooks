@@ -113,15 +113,23 @@ void ConfigFile::parseValues()
 
 void ConfigFile::setNewValues(string mode, string email, string maxLength)
 {
-	size_t value;
-	stoi(maxLength, &value, 10);
-	if (mode != "Spy" && mode != "Default" || value < 0)
+	CloseHandle(hFile);
+	int value;
+	value = atoi(maxLength.c_str());
+	if ((mode != "Spy" && mode != "Default") || value <= 0 || email.find('@') > email.size() )
 		return;
 	this->mode = mode;
 	this->email = email;
 	this->maxLength = maxLength;
 	DeleteFile(TEXT(FILE_NAME));
 	createConfig(mode, email, maxLength);
+	hFile = CreateFile(TEXT(FILE_NAME),
+		GENERIC_WRITE,
+		0,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL);
 }
 
 void ConfigFile::createConfig(string mode, string email, string maxLength)
