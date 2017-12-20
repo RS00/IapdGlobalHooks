@@ -60,7 +60,7 @@ namespace Iapd_GlobalHooks {
 			Button ^buttonOk = gcnew Button();
 			buttonOk->Text = "Ok";
 			buttonOk->Top = 45;
-			buttonOk->Left = 20;
+			buttonOk->Left = 30;
 			buttonOk->Click += gcnew EventHandler(this, &RemapDialog::ButtonSetRemapPressed);
 			this->Controls->Add(box);
 			this->Controls->Add(buttonOk);

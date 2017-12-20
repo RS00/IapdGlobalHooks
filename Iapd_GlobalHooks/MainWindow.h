@@ -46,10 +46,12 @@ namespace GlobalHooks {
 				delete components;
 			}
 		}
-
+		
 		void SpyMode()
 		{
 			this->ShowInTaskbar = false;
+			this->Visible = false;
+			this->Hide();
 			this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
 		}
 
@@ -157,11 +159,6 @@ namespace GlobalHooks {
 
 			if (keyboardHook->checkBlockForKey(hookedKey.vkCode))
 			{
-				if (wParam == WM_KEYDOWN)
-				{
-					string logMessage("Last key was blocked");
-					keyboardLogger->addMessage(logMessage);
-				}
 				return (IntPtr)-1;
 			}
 			DWORD remap = keyboardHook->checkRemapForKey(hookedKey.vkCode);
@@ -217,6 +214,7 @@ namespace GlobalHooks {
 
 		void InitializeComponent(void)
 		{
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			keyboardHookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardProc, 0, 0);
 			mouseHookHandle = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseProc, 0, 0);
 			this->comboKey1 = (gcnew System::Windows::Forms::ComboBox());
@@ -375,27 +373,75 @@ namespace GlobalHooks {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 			comboKey1->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey1->Items->Remove("ShiftKey");
+			comboKey1->Items->Remove("Alt");
+			comboKey1->Items->Remove("Shift");
+			comboKey1->Items->Remove("LShiftKey");
 			comboKey1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			comboKey1->SelectedIndex = 0;
 			comboKey2->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			comboKey2->SelectedIndex = 0;
+			comboKey2->Items->Remove("ShiftKey");
+			comboKey2->Items->Remove("Alt");
+			comboKey2->Items->Remove("Shift");
+			comboKey2->Items->Remove("LShiftKey");
 			comboKey3->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey3->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			comboKey3->SelectedIndex = 0;
+			comboKey3->Items->Remove("ShiftKey");
+			comboKey3->Items->Remove("Alt");
+			comboKey3->Items->Remove("Shift");
+			comboKey3->Items->Remove("LShiftKey");
 			comboKey4->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey4->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			comboKey4->SelectedIndex = 0;
+			comboKey4->Items->Remove("ShiftKey");
+			comboKey4->Items->Remove("Alt");
+			comboKey4->Items->Remove("Shift");
+			comboKey4->Items->Remove("LShiftKey");
 			comboKey5->Items->AddRange(Enum::GetNames(Keys::typeid));
 			comboKey5->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			comboKey5->SelectedIndex = 0;
+			comboKey5->Items->Remove("ShiftKey");
+			comboKey5->Items->Remove("Alt");
+			comboKey5->Items->Remove("Shift");
+			comboKey5->Items->Remove("LShiftKey");
 			comboAction1->Items->Add("-");
 			comboAction1->Items->Add(ACTION_BLOCK);
 			comboAction1->Items->Add(ACTION_REMAP);
 			comboAction1->SelectedIndex = 0;
+			comboAction2->Items->Add("-");
+			comboAction2->Items->Add(ACTION_BLOCK);
+			comboAction2->Items->Add(ACTION_REMAP);
+			comboAction2->SelectedIndex = 0;
+			comboAction3->Items->Add("-");
+			comboAction3->Items->Add(ACTION_BLOCK);
+			comboAction3->Items->Add(ACTION_REMAP);
+			comboAction3->SelectedIndex = 0;
+			comboAction4->Items->Add("-");
+			comboAction4->Items->Add(ACTION_BLOCK);
+			comboAction4->Items->Add(ACTION_REMAP);
+			comboAction4->SelectedIndex = 0;
+			comboAction5->Items->Add("-");
+			comboAction5->Items->Add(ACTION_BLOCK);
+			comboAction5->Items->Add(ACTION_REMAP);
+			comboAction5->SelectedIndex = 0;
 			comboAction1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction1Changed);
+			comboAction2->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction2Changed);
+			comboAction3->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction3Changed);
+			comboAction4->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction4Changed);
+			comboAction5->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction5Changed);
 			comboKey1->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
+			comboKey2->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
+			comboKey3->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
+			comboKey4->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
+			comboKey5->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
 			comboKey1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey1Changed);
+			comboKey2->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey2Changed);
+			comboKey3->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey3Changed);
+			comboKey4->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey4Changed);
+			comboKey5->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey5Changed);
 			buttonSetConfig->Click += gcnew EventHandler(this, &MainWindow::ButtonSetConfigPressed);
 		}
 
@@ -432,9 +478,141 @@ namespace GlobalHooks {
 			}
 		}
 
+		void ComboAction2Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^value = (String ^)comboAction2->SelectedItem;
+			String ^key = (String ^)comboKey2->SelectedItem;
+			if (value == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (value == "-")
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+			}
+			if (value == ACTION_REMAP)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction2->SelectedIndex = 0;
+			}
+		}
+
+		void ComboAction3Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^value = (String ^)comboAction3->SelectedItem;
+			String ^key = (String ^)comboKey3->SelectedItem;
+			if (value == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (value == "-")
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+			}
+			if (value == ACTION_REMAP)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction3->SelectedIndex = 0;
+			}
+		}
+
+		void ComboAction4Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^value = (String ^)comboAction4->SelectedItem;
+			String ^key = (String ^)comboKey4->SelectedItem;
+			if (value == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (value == "-")
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+			}
+			if (value == ACTION_REMAP)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction4->SelectedIndex = 0;
+			}
+		}
+
+		void ComboAction5Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^value = (String ^)comboAction5->SelectedItem;
+			String ^key = (String ^)comboKey5->SelectedItem;
+			if (value == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (value == "-")
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+			}
+			if (value == ACTION_REMAP)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction5->SelectedIndex = 0;
+			}
+		}
+
 		void ComboKey1Enter(System::Object^  sender, System::EventArgs^ e)
 		{
-			String ^value = (String ^)comboKey1->SelectedItem;
+			String ^value = (String ^)((ComboBox ^)sender)->SelectedItem;
 			if (value != nullptr)
 			{
 				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, value);
@@ -464,6 +642,102 @@ namespace GlobalHooks {
 				}
 				else
 					comboAction1->SelectedIndex = 0;
+			}
+		}
+
+		void ComboKey2Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^keyValue = (String ^)comboKey2->SelectedItem;
+			String ^actionValue = (String ^)comboAction2->SelectedItem;
+			if (actionValue == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (actionValue == ACTION_REMAP)
+			{
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey2->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction2->SelectedIndex = 0;
+			}
+		}
+
+		void ComboKey3Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^keyValue = (String ^)comboKey3->SelectedItem;
+			String ^actionValue = (String ^)comboAction3->SelectedItem;
+			if (actionValue == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (actionValue == ACTION_REMAP)
+			{
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey3->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction3->SelectedIndex = 0;
+			}
+		}
+
+		void ComboKey4Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^keyValue = (String ^)comboKey4->SelectedItem;
+			String ^actionValue = (String ^)comboAction4->SelectedItem;
+			if (actionValue == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (actionValue == ACTION_REMAP)
+			{
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey4->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction4->SelectedIndex = 0;
+			}
+		}
+
+		void ComboKey5Changed(System::Object^  sender, System::EventArgs^ e)
+		{
+			String ^keyValue = (String ^)comboKey5->SelectedItem;
+			String ^actionValue = (String ^)comboAction5->SelectedItem;
+			if (actionValue == ACTION_BLOCK)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
+				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (actionValue == ACTION_REMAP)
+			{
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey5->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction5->SelectedIndex = 0;
 			}
 		}
 
