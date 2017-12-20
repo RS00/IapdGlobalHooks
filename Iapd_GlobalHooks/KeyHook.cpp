@@ -33,3 +33,29 @@ void KeyHook::deleteBlock(DWORD key)
 {
 	blockList.erase(key);
 }
+
+void KeyHook::addRemap(DWORD key1, DWORD key2)
+{
+	remapList.insert(pair<DWORD, DWORD>(key1, key2));
+}
+
+DWORD KeyHook::checkRemapForKey(DWORD key1)
+{
+	for (map<DWORD, DWORD>::iterator it = remapList.begin(); it != remapList.end(); it++)
+	{
+		if ((*it).first == key1)
+			return (*it).second;
+	}
+	return NO_REMAP;
+}
+
+void KeyHook::deleteRemap(DWORD key)
+{
+	for (map<DWORD, DWORD>::iterator it = remapList.begin(); it != remapList.end(); )
+	{
+		if ((*it).first == key)
+			remapList.erase(it++);
+		else
+			it++;
+	}
+}

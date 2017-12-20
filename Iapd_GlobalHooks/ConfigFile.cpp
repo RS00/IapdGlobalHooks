@@ -8,10 +8,18 @@ ConfigFile::ConfigFile()
 		createConfig(DEFAULT_MODE, DEFAULT_EMAIL, DEFAULT_MAX_LENGTH);
 	}
 	parseValues();
+	hFile = CreateFile(TEXT(FILE_NAME),
+		GENERIC_WRITE,
+		0,
+		NULL,
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL);
 }
 
 ConfigFile::~ConfigFile()
 {
+	CloseHandle(hFile);
 }
 
 void ConfigFile::encryptFile()

@@ -15,6 +15,7 @@ using namespace std;
 class ConfigFile
 {
 private:
+	HANDLE hFile;
 	string mode;
 	string email;
 	string maxLength;

@@ -144,10 +144,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigFile.h" />
+    <ClInclude Include="ConfigForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Email.h" />
     <ClInclude Include="KeyHook.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MainWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RemapDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -161,7 +167,6 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

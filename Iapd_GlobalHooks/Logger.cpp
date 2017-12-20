@@ -4,10 +4,15 @@ string Logger::emailReceiver;
 
 Logger::Logger(long long maxLength, string emailReceiver, wstring fileName)
 {
+	this->emailReceiver = emailReceiver;
 	this->fileName = fileName;
 	this->maxLength = maxLength;
-	this->currentLength = 0;
-	this->emailReceiver = emailReceiver;
+	this->currentLength = this->getCurrentFileSize();
+	if (currentLength > maxLength)
+	{
+		DeleteFile(fileName.c_str());
+		currentLength = 0;
+	}
 	hFile = CreateFile(fileName.c_str(),
 		GENERIC_WRITE,
 		0,
@@ -122,4 +127,28 @@ wstring Logger::renameCurrentFile()
 	} while (infile.good());
 	MoveFile(fileName.c_str() , newName.c_str());
 	return newName;
+}
+
+
+long long Logger::getCurrentFileSize()
+{
+	ifstream ifs(fileName.c_str(), ios_base::in);
+	stringstream buffer;
+	buffer << ifs.rdbuf();
+	string content(buffer.str());
+	long long size = 0;
+	for (std::size_t pos = 0; pos < content.size(); pos ++)
+	{
+		pos = content.find('\n', pos);
+		if (pos != std::string::npos)
+		{
+			size++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	ifs.close();
+	return size;
 }

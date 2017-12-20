@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <chrono>
 #include <fstream>
+#include <sstream>
 #include "Email.h"
 using namespace std;
 class Logger
@@ -17,6 +18,7 @@ private:
 	static void sendFileNewThread(LPVOID arg);
 	static void clearFile(wstring fileName);
 	wstring renameCurrentFile();
+	long long getCurrentFileSize();
 public:
 	Logger(long long maxLength, string emailReceiver, wstring fileName);
 	~Logger();

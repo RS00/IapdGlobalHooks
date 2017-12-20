@@ -14,9 +14,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="KeyHook.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -44,6 +41,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigForm.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RemapDialog.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
